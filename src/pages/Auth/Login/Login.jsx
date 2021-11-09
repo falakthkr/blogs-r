@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authorizeLogin } from "../../../redux/auth/actions";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Typography } from "antd";
 import { Redirect } from "react-router-dom";
+
+const { Title } = Typography;
+
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,6 +42,8 @@ const Login = () => {
   }
   return (
     <Form {...layout} onSubmit={handleSubmit}>
+      <br />
+      <Title level={4}>Login</Title>
       <br />
       <Form.Item
         label="Username"
