@@ -38,28 +38,32 @@ export const getPostDetailsFailure = (payload) => ({
     payload,
 });
 
-export const getAllPosts = (payload) => (dispatch) => {
+export const getAllPosts = () => (dispatch) => {
     dispatch(getAllPostsRequest());
     return axios
         .get("https://frozen-fjord-76966.herokuapp.com/blogs-app/cards")
-        .then((res) => res.data)
         .then((res) => {
-            if (res.statusCode === 200) {
+            if (res.status === 200) {
                 return dispatch(getAllPostsSuccess({ allPostsData: res.data }));
+            } else {
+                return dispatch(getAllPostsFailure({ message: "Error" }));
             }
-            return dispatch(getAllPostsFailure({ message: "Error" }));
         });
 };
 
-export const getPostDetails = (payload) => (dispatch) => {
+export const getPostDetails = (id) => (dispatch) => {
     dispatch(getPostDetailsRequest());
     return axios
-        .get(`https://frozen-fjord-76966.herokuapp.com/blogs-app/cards/${payload.id}`)
-        .then((res) => res.data)
+        .get(
+            `https://frozen-fjord-76966.herokuapp.com/blogs-app/cards/${id}`
+        )
+        .then((res) => res)
         .then((res) => {
-            if (res.statusCode === 200) {
+            if (res.status === 200) {
                 return dispatch(getPostDetailsSuccess({ postDetailsData: res.data }));
+            } else {
+
+                return dispatch(getPostDetailsFailure({ message: "Error" }));
             }
-            return dispatch(getPostDetailsFailure({ message: "Error" }));
         });
 };

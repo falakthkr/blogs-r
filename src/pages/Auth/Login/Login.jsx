@@ -18,7 +18,7 @@ const Login = () => {
     dispatch(authorizeLogin({ username, password }));
   };
 
-  const isAuth = useSelector((state) => state.isAuth);
+  const isAuth = useSelector((state) => state.login.isAuth);
 
   const layout = {
     labelCol: { span: 8 },

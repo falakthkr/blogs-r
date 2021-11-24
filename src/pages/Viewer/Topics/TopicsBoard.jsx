@@ -1,8 +1,7 @@
 import React from "react";
-import { Layout, Menu, Card, Col, Row } from "antd";
-import { Link } from "react-router-dom";
-
-const { Header, Content, Footer } = Layout;
+import { Layout, Card, Col, Row } from "antd";
+import Navbar from "../../../components/ViewerNav";
+const { Content, Footer } = Layout;
 const { Meta } = Card;
 
 class Dashboard extends React.Component {
@@ -47,25 +46,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Layout>
-          <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-            <div className="logo" />
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-              <Menu.Item key="1">
-                <Link to="/">Home</Link>
-              </Menu.Item>
-              <Menu.Item key="2">
-              <Link to="/topics">Topics</Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-              <Link to="/discover">Discover</Link>
-              </Menu.Item>
-            </Menu>
-          </Header>
-          {/* <Affix offsetTop={16} style={{ position: "absolute", right: 16 }}>
-            <Button type="primary" icon={<FormOutlined />}>
-              New Post
-            </Button>
-          </Affix> */}
+          <Navbar />
           <Content
             className="site-layout"
             style={{ padding: "0 50px", marginTop: 64 }}
@@ -78,7 +59,7 @@ class Dashboard extends React.Component {
                 <Row gutter={16}>
                   {this.state.cards.map((item) => {
                     return (
-                      <Col key={item.id + 'Topic'} span={8}>
+                      <Col key={item.id + "Topic"} span={8}>
                         <Card
                           hoverable
                           style={{ margin: "10px" }}
