@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getPostDetails } from "../../../redux/posts/actions";
 import Navbar from "../../../components/ViewerNav";
 import { Layout } from "antd";
@@ -11,17 +11,15 @@ const { Content } = Layout;
 const Post = () => {
   const dispatch = useDispatch();
   let params = useParams();
-  
-  const [post, setPost] = useState({});
-  
+
+  const post = useSelector((state) => state.posts.postDetailsData);
+
   const getPostDetailsFn = () => {
-    dispatch(getPostDetails(params.id)).then((res) => {
-      setPost(res.payload.postDetailsData);
-    });
+    dispatch(getPostDetails(params.id));
   };
   useEffect(() => {
     getPostDetailsFn();
-  });
+  }, []);
 
   const routes = [
     {
@@ -47,10 +45,10 @@ const Post = () => {
             className="site-layout-background"
             style={{ padding: 24, minHeight: 380, marginTop: "20px" }}
           >
-            <div className="site-card-wrapper">
+            <div style={{height:"fit-content"}} className="site-card-wrapper">
               <h3>{post.title}</h3>
               <br />
-              <img src={post.image} alt={post.title} width="40%" style={{marginBottom: '20px'}} />
+              <img src={post.image.src} alt={post.image.alt} style={{margin:"10px"}} />
               <p>{post.postBody}</p>
             </div>
           </div>

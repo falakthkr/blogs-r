@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import Navbar from "../../../components/ViewerNav"
+import Navbar from "../../../components/ViewerNav";
 import { getAllPosts } from "../../../redux/posts/actions";
 import { Layout, Card, Col, Row } from "antd";
 import { Link } from "react-router-dom";
@@ -14,13 +14,13 @@ const Dashboard = () => {
   const [cards, setCards] = useState([]);
 
   const getCards = () => {
-    dispatch(getAllPosts()).then((res)=>{
-      setCards(res.payload.allPostsData)
-    })
-  }
+    dispatch(getAllPosts()).then((res) => {
+      setCards(res.payload.allPostsData);
+    });
+  };
 
   useEffect(() => {
-    getCards()
+    getCards();
   });
   return (
     <div>
@@ -38,14 +38,20 @@ const Dashboard = () => {
               <Row gutter={16}>
                 {cards.map((item) => {
                   return (
-                    <Col key={item.id} span={8}>
+                    <Col key={item._id} span={8}>
                       <Link to={`/post/${item._id}`}>
                         <Card
                           hoverable
                           style={{ margin: "10px" }}
-                          cover={<img alt="example" src={item.image} />}
+                          cover={
+                            <img
+                              alt={item.image.alt}
+                              src={item.image.src}
+                              style={{ height: "500px" }}
+                            />
+                          }
                         >
-                          <Meta title={item.title} description={item.description} />
+                          <Meta title={item.title} description={item.desc} />
                         </Card>
                       </Link>
                     </Col>
@@ -61,6 +67,6 @@ const Dashboard = () => {
       </Layout>
     </div>
   );
-}
+};
 
 export default Dashboard;

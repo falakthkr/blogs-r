@@ -41,7 +41,7 @@ export const getPostDetailsFailure = (payload) => ({
 export const getAllPosts = () => (dispatch) => {
     dispatch(getAllPostsRequest());
     return axios
-        .get("https://frozen-fjord-76966.herokuapp.com/blogs-app/cards")
+        .get("https://master-backend-blond.vercel.app/blogs")
         .then((res) => {
             if (res.status === 200) {
                 return dispatch(getAllPostsSuccess({ allPostsData: res.data }));
@@ -55,7 +55,7 @@ export const getPostDetails = (id) => (dispatch) => {
     dispatch(getPostDetailsRequest());
     return axios
         .get(
-            `https://frozen-fjord-76966.herokuapp.com/blogs-app/cards/${id}`
+            `https://master-backend-blond.vercel.app/blogs/${id}`
         )
         .then((res) => res)
         .then((res) => {

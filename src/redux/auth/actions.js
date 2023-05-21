@@ -33,7 +33,7 @@ export const logoutFailure = (payload) => ({
 
 export const authorizeLogin = (payload) => dispatch => {
     dispatch(loginRequest())
-    return axios.get("https://frozen-fjord-76966.herokuapp.com/users")
+    return axios.get("https://master-backend-blond.vercel.app/users")
         .then(res => res.data)
         .then(res => {
             let current = res.find(item => item.username === payload.username)
